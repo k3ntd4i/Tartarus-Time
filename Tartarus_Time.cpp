@@ -4,7 +4,7 @@
 
 int main()
 {
-    unsigned long long int combinaciones_por_segundo{};
+    long double combinaciones_por_segundo{};
     unsigned int caracteres_disponibles{};
     unsigned int longitud_contrasenia{};
 
@@ -16,6 +16,7 @@ int main()
     
     std::cout << "[+] Digite el numero de combinaciones por segundo soportados en el ataque: ";
     std::cin >> combinaciones_por_segundo;
+    combinaciones_por_segundo = std::abs(combinaciones_por_segundo);
 
     long double permutacion{ std::pow(caracteres_disponibles, longitud_contrasenia) };
     long double tiempo{ permutacion / combinaciones_por_segundo }; // segundos
@@ -23,25 +24,12 @@ int main()
     int operador_tiempo[4] { 60, 60, 24, 365 };
  
     std::string unidad_tiempo[5] { "segundo", "minuto", "hora", "dia", "anio" };
-    int indice_unidad_tiempo{};
+    int indice_unidad_tiempo{ 0 };
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; (i < 4) && (tiempo >= operador_tiempo[i]); i++)
     {
-        if (tiempo >= 60 && i < 2)
-        {
-            tiempo /= operador_tiempo[i];
-            indice_unidad_tiempo = i + 1;
-        }
-        else if (tiempo >= 24 && i < 3)
-        {
-            tiempo /= operador_tiempo[i];
-            indice_unidad_tiempo++;
-        }
-        else if (tiempo >= 365)
-        {
-            tiempo /= operador_tiempo[i];
-            indice_unidad_tiempo++;
-        }
+        tiempo /= operador_tiempo[i];
+        indice_unidad_tiempo++;
     }
 
     std::cout
