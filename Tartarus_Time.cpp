@@ -26,7 +26,7 @@ int main()
     std::string unidad_tiempo[5] { "segundo", "minuto", "hora", "dia", "anio" };
     int indice_unidad_tiempo{ 0 };
 
-    for (int i = 0; (i < 4) && (tiempo >= operador_tiempo[i]); i++)
+    for (int i{0}; (i < 4) && (tiempo >= operador_tiempo[i]); i++)
     {
         tiempo /= operador_tiempo[i];
         indice_unidad_tiempo++;
